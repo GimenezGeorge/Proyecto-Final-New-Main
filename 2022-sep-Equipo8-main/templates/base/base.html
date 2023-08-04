@@ -1,0 +1,69 @@
+{% load static %}
+<!doctype html>
+<html lang="es-ar">
+    <head>
+        {{ form.media }}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fundación Pueblo</title>
+        <link rel="icon"  type="image/png" href="https://scontent.fres4-1.fna.fbcdn.net/v/t39.30808-6/304286679_572116524700945_895924801033842080_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=uY5QFnu0vAYAX8NttZN&_nc_ht=scontent.fres4-1.fna&oh=00_AfDV9zDP7QnHHyqKX2I_SEm9AO3K1jZS0A80Ppx20jcbwQ&oe=63AA26A2">
+        <meta name="theme-color" content="#2982b3">>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+            <header>
+                {% include "base/header.html" %}
+            </header>
+            <main>
+                <h1>Fundación Pueblo</h1>
+                {% include "base/portada.html" %}
+                
+                    {% block menu %}
+                        {% if user.is_authenticated %}
+                            <div class="album py-5 bg-light">
+                                <div class="container">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'articulos:admin_nuevo' %}">Agregar un nuevo Artículo</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'articulos:mis_articulos' %}">Gestionar mis Artículos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'comentarios:mis_comentarios' %}">Gestionar mis Comentarios</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'usuarios:admin_editar' user.id %}">Gestionar mi Usuario</a>
+                                        </li>
+                                        
+                                            {% if user.es_administrador %}
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'articulos:admin_listar' %}">Gestionar todos los Artículos</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'categorias:admin_listar' %}">Gestionar todas las Categorias</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'usuarios:admin_listar' %}">Gestionar todos las Usuarios</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'comentarios:admin_listar' %}">Gestionar todos los Comentarios</a>
+                                                </li>
+                                            {% endif %}
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endblock menu %}
+                  
+                    {% block contenido %}
+                    {% endblock contenido %}
+ 
+
+                {% include "base/footer.html" %}
+            </main>
+         
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>

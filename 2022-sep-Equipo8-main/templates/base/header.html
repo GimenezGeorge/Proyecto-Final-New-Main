@@ -1,0 +1,21 @@
+<nav>
+    <div>
+        <ul>
+            <li class="logo">
+            <a href="{% url 'inicio' %}"><img src="https://scontent.fres4-1.fna.fbcdn.net/v/t39.30808-6/304286679_572116524700945_895924801033842080_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=uY5QFnu0vAYAX8NttZN&_nc_ht=scontent.fres4-1.fna&oh=00_AfDV9zDP7QnHHyqKX2I_SEm9AO3K1jZS0A80Ppx20jcbwQ&oe=63AA26A2" alt="Fundación Pueblo logo"></a>
+            </li>
+            <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" class="nav-link">Cerrar sesión</a></li>
+                    {% else %}    
+                    <li><a href="{% url 'login' %}" class="nav-link">Iniciar sesión</a></li>
+                    {% endif %}
+            </li>
+        </ul>
+            <form class="d-flex" method="GET" id="custom-search-input">
+                <input type="text" class="form-control me-2" name="titulo_articulo" placeholder="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+    </div>
+</nav>
+<br>
